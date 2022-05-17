@@ -1,8 +1,8 @@
 class Ipv4:
     def __init__(self, rede: str):
         self.location_network = self.valid_network(rede)
-        self.network = self.F_network()
-        self.cidr = self.F_cidr()
+        self.network = self.f_network()
+        self.cidr = self.f_cidr()
         self.sub_net_mask = self.sub_network_mask()
         self.ip_network = self.f_ip_network()
         self.broadcast = self.f_broadcast()
@@ -19,10 +19,10 @@ class Ipv4:
 
         return ip.strip()
 
-    def F_network(self) -> str:
+    def f_network(self) -> str:
         return self.location_network.split('/')[0]
 
-    def F_cidr(self) -> str:
+    def f_cidr(self) -> str:
         cidr = self.location_network.split('/')[1]
         return f'/{cidr}'
 
@@ -71,7 +71,7 @@ class Ipv4:
         net = ''.join(self.binary().split(' '))
         ip = ''
         ip_final = ['', '', '', '']
-        max = int(self.F_cidr().replace('/', ''))
+        max = int(self.f_cidr().replace('/', ''))
         count = 0
 
         for number in range(max):
@@ -114,9 +114,9 @@ class Ipv4:
         value = -1 if not first else +1
 
         if first:
-            ip = self.f_ip_network().replace(f'{self.F_cidr()}', '')
+            ip = self.f_ip_network().replace(f'{self.f_cidr()}', '')
         else:
-            ip = self.f_broadcast().replace(f'{self.F_cidr()}', '')
+            ip = self.f_broadcast().replace(f'{self.f_cidr()}', '')
 
         last_ip = ip.split('.')
         last_ip[-1] = str(int(last_ip[-1]) + value)
